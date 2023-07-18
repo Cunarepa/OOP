@@ -1,15 +1,18 @@
+package test;
+
 import java.awt.*;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
+import java.awt.List;
 
-public class Human {
+public class Human extends Point {
     private String name;
     private Gender gender;
-    private LocalDate birthDate;<
+    private LocalDate birthDate;
     private LocalDate deathDate;
-    private List<Human> parents;
-    private List<Human> children;
+    private java.util.List<Human> parents;
+    private List children;
     private Human spouse;
 
     public Human(String name, Gender gender, LocalDate birthDate, LocalDate deathDate, Human father, Human mother, List children) {
@@ -74,9 +77,9 @@ public class Human {
         return null;
     }
 
-    public List<Human> getParents(){ return parents; }
+    public List Human; Component getParents(){ return (List<Human>) parents; }
 
-    public List<Human> getChildren() {
+    public java.util.List<test.Human> Component; java.awt.Component getChildren() {
         return children;
     }
 
