@@ -1,24 +1,51 @@
 package family_tree;
 
 
+import java.io.Serializable;
+import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
-public class Human {
-    private String name;
+public class Human implements Serializable {
+    private String NAME;
+    private Year yearOfBirth;
+    private String sex;
     private Human father;
     private Human mother;
-    List<Human> children;
+    private List<Human> children;
 
-    public Human(String name) {
-        this.name = name;
+    public Human(String name, String sex, int yearOfBirth) {
+        this.NAME = name;
+        this.yearOfBirth = Year.of(yearOfBirth);
+        this.sex = sex;
         this.father = null;
         this.mother = null;
         this.children = new ArrayList<>();
     }
 
+    public String getNAME() {
+        return NAME;
+    }
+
+    public Year getYearOfBirth() {
+        return yearOfBirth;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public Human getFather() {
+        return father;
+    }
+
     public void setFather(Human father) {
         this.father = father;
+    }
+
+    public Human getMother() {
+        return mother;
     }
 
     public void setMother(Human mother) {
@@ -29,45 +56,21 @@ public class Human {
         this.children.add(child);
     }
 
-    public Human getFather() {
-        return father;
-    }
-
-    public Human getMother() {
-        return mother;
-    }
-
     public List<Human> getChildren() {
         return children;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-
-    public void showChildren() {
-        if (!children.isEmpty()) {
-            System.out.println("Родитель: " + name);
-            int count = 1;
-            for (Human child : children) {
-                System.out.printf("-> Ребенок %d: %s\n", count++, child.getName());
-            }
-        } else {
-            System.out.printf("%s не имеет детей.", name);
-        }
     }
 
     @Override
     public String toString() {
         ArrayList<String> temp = new ArrayList<>();
         for (Human child : children) {
-            temp.add(child.getName());
+            temp.add(child.getNAME());
         }
-        return "Human{" +
-                "name='" + name + '\'' +
-                ", father=" + ((father != null) ? father.getName() : "unknown") +
-                ", mother=" + ((mother != null) ? mother.getName() : "unknown") +
+        return "trees.Human{" +
+                "Name='" + NAME + '\'' +
+                ", date of brith=" + yearOfBirth +
+                ", father=" + Optional.ofNullable(father).map(Human::getNAME).orElse("unknown") +
+                ", mother=" + Optional.ofNullable(mother).map(Human::getNAME).orElse("unknown") +
                 ", children=" + temp + "}";
 
     }
