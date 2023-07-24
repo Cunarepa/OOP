@@ -1,12 +1,13 @@
-package view.menu.commands;
+package view.menu.mainMenu.commands;
 
 import view.ConsoleUI;
 
-public class GetAllRecord implements Command {
+public class ShowAllRecord implements Command {
 
     private ConsoleUI consoleUI;
 
-    public GetAllRecord(ConsoleUI consoleUI) {
+
+    public ShowAllRecord(ConsoleUI consoleUI) {
         this.consoleUI = consoleUI;
     }
 
@@ -17,7 +18,7 @@ public class GetAllRecord implements Command {
 
     @Override
     public void execute() {
-        consoleUI.getAllRecord();
+        consoleUI.showAllRecord();
 
     }
 }

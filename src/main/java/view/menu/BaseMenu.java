@@ -1,25 +1,17 @@
 package view.menu;
 
 import view.ConsoleUI;
-import view.menu.commands.*;
+import view.menu.mainMenu.commands.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
-
-public class MainMenu {
+public abstract class BaseMenu  {
     private List<Command> commandList;
 
-    public MainMenu(ConsoleUI consoleUI) {
-        this.commandList = new ArrayList<>();
-
-        this.commandList.add(new AddRecord(consoleUI));
-        this.commandList.add(new GetRecord(consoleUI));
-        this.commandList.add(new GetAllRecord(consoleUI));
-        this.commandList.add(new Finish(consoleUI));
-
-
+    public BaseMenu(List<Command> commandList) {
+        this.commandList = commandList;
     }
+
 
     public String printMenu() {
         StringBuilder stringBuilder = new StringBuilder();
@@ -39,8 +31,18 @@ public class MainMenu {
         command.execute();
     }
 
+
     public int size() {
         return commandList.size();
+    }
+
+
+    public int checkInputLineMenu(String choice) {
+        if (choice.matches("[0-9]+")) {
+            int result = Integer.parseInt(choice);
+            if (result > 0 && result <= size()) return result;
+        }
+        return -1;
     }
 
 

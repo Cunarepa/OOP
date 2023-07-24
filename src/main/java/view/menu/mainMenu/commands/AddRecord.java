@@ -1,9 +1,9 @@
-package view.menu.commands;
+package view.menu.mainMenu.commands;
 
 import view.ConsoleUI;
-
 public class AddRecord implements Command {
     private ConsoleUI consoleUI;
+
 
     public AddRecord(ConsoleUI consoleUI) {
         this.consoleUI = consoleUI;
@@ -16,6 +16,6 @@ public class AddRecord implements Command {
 
     @Override
     public void execute() {
-        consoleUI.addRecordInTree();
+        consoleUI.addRecord();
     }
 }

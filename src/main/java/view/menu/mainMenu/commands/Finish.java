@@ -1,10 +1,11 @@
-package view.menu.commands;
+package view.menu.mainMenu.commands;
 
 import view.ConsoleUI;
 
 public class Finish implements Command {
 
     private ConsoleUI consoleUI;
+
 
     public Finish(ConsoleUI consoleUI) {
         this.consoleUI = consoleUI;

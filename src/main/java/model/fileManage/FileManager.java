@@ -8,30 +8,16 @@ import model.fileManage.interfaces.Savable;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
-
 public class FileManager implements Savable, Loadable {
+
+
     private String filePath;
-    private File file;
 
 
     public FileManager(String filePath) {
         this.filePath = filePath;
     }
 
-    public void setFilePath(String filePath) {
-        if (file.exists()) {
-            System.out.println("Файл найден: " + filePath);
-            this.file = new File(filePath);
-        } else {
-            System.out.println("Файл не существует: " + filePath);
-        }
-    }
-
-
-
-    public boolean filePathCheck() {
-        return file.exists();
-    }
 
 
     @Override
@@ -43,6 +29,8 @@ public class FileManager implements Savable, Loadable {
             System.out.println("Export error");
         }
     }
+
+
 
     @Override
     public FamilyTree loadFile() {

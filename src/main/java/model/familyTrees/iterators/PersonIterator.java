@@ -1,12 +1,11 @@
 package model.familyTrees.iterators;
 
-
 import model.members.Member;
 
 import java.util.Iterator;
 import java.util.List;
 
-public class PersonIterator <T extends Member>implements Iterator<T> {
+public class PersonIterator<T extends Member> implements Iterator<T> {
 
     private int index;
     private List<T> personList;
@@ -14,6 +13,7 @@ public class PersonIterator <T extends Member>implements Iterator<T> {
     public PersonIterator(List<T> personList) {
         this.personList = personList;
     }
+
 
     @Override
 

@@ -1,9 +1,10 @@
-package view.menu.commands;
+package view.menu.mainMenu.commands;
 
 import view.ConsoleUI;
 
 public class GetRecord implements Command {
     private ConsoleUI consoleUI;
+
 
     public GetRecord(ConsoleUI consoleUI) {
         this.consoleUI = consoleUI;

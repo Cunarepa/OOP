@@ -1,23 +1,32 @@
 package model.members;
 
-
 import java.io.Serializable;
 import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Aliens implements Member, Serializable {
+
     private String name;
     private String surname;
     private Year yearOfBirth;
-    private String gender;
-    private Aliens father;
-    private Aliens mother;
+    private Gender gender;
+    private Member father;
+    private Member mother;
     private List<Member> children;
 
-    public Aliens(String NAME, String surname, String gender, int yearOfBirth) {
+    public Aliens(String NAME, String surname, Gender gender, int yearOfBirth) {
         this.name = NAME;
         this.surname = surname;
+        this.yearOfBirth = Year.of(yearOfBirth);
+        this.gender = gender;
+        this.father = null;
+        this.mother = null;
+        this.children = new ArrayList<>();
+    }
+    public Aliens(String name, Gender gender, int yearOfBirth) {
+        this.name = name;
+        this.surname = null;
         this.yearOfBirth = Year.of(yearOfBirth);
         this.gender = gender;
         this.father = null;
@@ -36,7 +45,7 @@ public class Aliens implements Member, Serializable {
     }
 
     @Override
-    public String getGender() {
+    public Gender getGender() {
         return gender;
     }
 
@@ -68,5 +77,18 @@ public class Aliens implements Member, Serializable {
     @Override
     public List<Member> getChildren() {
         return children;
+    }
+
+    @Override
+    public String toString() {
+        return "Aliens{" +
+                "name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", yearOfBirth=" + yearOfBirth +
+                ", gender='" + gender + '\'' +
+                ", father=" + father +
+                ", mother=" + mother +
+                ", children=" + children +
+                '}';
     }
 }

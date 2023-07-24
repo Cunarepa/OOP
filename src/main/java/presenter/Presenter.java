@@ -1,47 +1,86 @@
 package presenter;
 
-import model.familyTrees.FamilyTree;
-import model.fileManage.FileManager;
+import model.members.Human;
+import model.service.HumanService;
+import model.members.Gender;
 import model.members.Member;
+import view.menu.sortMenu.SortingMenu;
 
-public class Presenter<T extends Member> {
-    private FamilyTree<T> familyTree;
-    private FileManager fileManager;
+import java.io.Serializable;
+import java.util.List;
+public class Presenter implements Serializable {
+    private HumanService humanService;
 
+
+    public Presenter() {
+        this.humanService = new HumanService();
+    }
+
+
+    public boolean checkCreateFamilyTree() {
+        return humanService.checkCreateFamilyTree();
+    }
+
+    public String getNameFamilyTree() {
+        return humanService.getNameFamilyTree();
+    }
 
     public void importFile(String filePath) {
-        fileManager = new FileManager(filePath);
-        familyTree = fileManager.loadFile();
+        humanService.importFile(filePath);
     }
 
     public void saveFile() {
-        fileManager.saveFile(familyTree);
+        humanService.saveFile();
     }
 
-    public FileManager getFileManager() {
-        return fileManager;
+    public void addRecord(String name, Gender gender, int yearOfBirth) {
+        humanService.addRecord(name, gender, yearOfBirth);
     }
 
-    public FamilyTree<T> getFamilyTree() {
-        return familyTree;
+    public void addRecord(String name, Gender gender, int dateOfBirth,
+                          String parentName, int yearOfBirth) {
+        humanService.addRecord(name, gender, dateOfBirth, parentName, yearOfBirth);
     }
 
-    public void addRecord(String name, String dateOfBirth) {
+    public void addRecord(String name, Gender gender, int dateOfBirth,
+                          String fatherName, int yearOfBirthFather,
+                          String motherName, int yearOfBirthMother) {
+        humanService.addRecord(
+                name, gender, dateOfBirth,
+                fatherName, yearOfBirthFather,
+                motherName, yearOfBirthMother);
+    }
 
-        System.out.println("Добавление записи");
+
+    public Member getRecord(String name, int yearOfBirth) {
+        return humanService.getRecord(name, yearOfBirth);
+    }
+
+
+    public List<Human> getAllRecord() {
+        return humanService.getAllRecord();
+    }
+
+
+    public List<Human> getParents(String name, int yearOfBirth) {
+        return humanService.getParents(name, yearOfBirth);
+    }
+
+    public List<Human> getChildren(String name, int yearOfBirth) {
+        return humanService.getChildren(name, yearOfBirth);
 
     }
 
-    public Member getRecord(String name, String  year) {
-        int num = Integer.parseInt(year);
-        return familyTree.getHumanFromTree(name, num);
+    public void sortByAlphabeticalOrder() {
+        humanService.sortByAlphabeticalOrder();
     }
 
-    public void getAllRecord() {
-        for (Member member : familyTree
-        ) {
-            System.out.println(member);
-        }
+
+    public void sortByDateBirth() {
+        humanService.sortByDateBirth();
     }
 
+    public void sortByNameLength() {
+        humanService.sortByNameLength();
+    }
 }
