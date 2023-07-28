@@ -1,7 +1,7 @@
-package view.menu.sortMenu.commands;
+package view.consoleUI.menu.sortingMenu.commands;
 
-import view.ConsoleUI;
-import view.menu.mainMenu.commands.Command;
+import view.consoleUI.ConsoleUI;
+import view.consoleUI.menu.mainMenu.commands.Command;
 
 public class SortByDateBirth implements Command {
     ConsoleUI consoleUI;

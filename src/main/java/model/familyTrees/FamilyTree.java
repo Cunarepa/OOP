@@ -1,8 +1,7 @@
 package model.familyTrees;
 
 import model.familyTrees.comparators.ByDateBirth;
-import model.familyTrees.comparators.NameLength;
-import model.familyTrees.iterators.PersonIterator;
+import model.familyTrees.iterators.FamilyTreeIterator;
 import model.members.Gender;
 import model.members.Member;
 
@@ -13,7 +12,6 @@ import java.util.*;
 public class FamilyTree<T extends Member> implements Serializable, Iterable<T> {
     private List<T> familyTree;
     private String nameFamilyTree;
-
     public FamilyTree(String nameFamilyTree) {
         this.nameFamilyTree = nameFamilyTree;
         this.familyTree = new ArrayList<>();
@@ -28,7 +26,6 @@ public class FamilyTree<T extends Member> implements Serializable, Iterable<T> {
         return familyTree;
     }
 
-
     public void addBranchParentChild(T parent, T child) {
         if (parent != null) {
             if (parent.getGender().equals(Gender.MAN)) {
@@ -42,18 +39,16 @@ public class FamilyTree<T extends Member> implements Serializable, Iterable<T> {
         }
     }
 
-
     private void addChildBranch(T parent, T child) {
 
         if (!parent.getChildren().contains(child)) {
-            parent.addChild((child));
+            parent.addChild(child);
         }
     }
 
     public void addPersonInFamilyTree(T person) {
         if (!isPersonInTree(person)) familyTree.add(person);
     }
-
 
     public void addPersonInFamilyTree(T person, String parent, int yearOfBirth) {
         if (!isPersonInTree(person)) {
@@ -103,7 +98,7 @@ public class FamilyTree<T extends Member> implements Serializable, Iterable<T> {
 
     @Override
     public Iterator<T> iterator() {
-        return new PersonIterator(familyTree);
+        return new FamilyTreeIterator(familyTree);
     }
 
     public void sortTreeByDateBirth() {

@@ -1,4 +1,4 @@
-package model.service;
+package model.services;
 
 import model.familyTrees.FamilyTree;
 import model.familyTrees.comparators.ByDateBirth;
@@ -8,8 +8,6 @@ import model.fileManage.FileManager;
 import model.members.Gender;
 import model.members.Human;
 import model.members.Member;
-import view.menu.sortMenu.SortingMenu;
-import view.menu.sortMenu.commands.SortByNameLength;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +15,6 @@ import java.util.List;
 public class HumanService {
     private FamilyTree<Human> familyTree;
     private FileManager fileManager;
-
     public HumanService() {
         this.familyTree = null;
     }
@@ -26,17 +23,14 @@ public class HumanService {
         return familyTree;
     }
 
-
-
-
     public String getNameFamilyTree() {
         return familyTree.getNameFamilyTree();
     }
 
-
     public boolean checkCreateFamilyTree() {
         return familyTree != null;
     }
+
 
     public void importFile(String filePath) {
         this.fileManager = new FileManager(filePath);
@@ -52,10 +46,6 @@ public class HumanService {
         familyTree.addPersonInFamilyTree(new Human(name, gender, dateOfBirth));
     }
 
-    public void addRecord(String name, Gender gender, int dateOfBirth,
-                          String parentName, int yearOfBirth) {
-        familyTree.addPersonInFamilyTree(new Human(name, gender, dateOfBirth), parentName, yearOfBirth);
-    }
 
     public void addRecord(String name, Gender gender, int dateOfBirth,
                           String fatherName, int yearOfBirthFather,
@@ -69,13 +59,9 @@ public class HumanService {
     public Member getRecord(String name, int year) {
         return familyTree.getPersonFromTree(name, year);
     }
-
-
     public List<Human> getAllRecord() {
         return familyTree.getFamilyTree();
     }
-
-
     public List<Human> getParents(String name, int yearOfBirth) {
         return convertMemberToChildren(familyTree.getParents(name, yearOfBirth));
     }
@@ -100,11 +86,10 @@ public class HumanService {
     }
 
     public void sortByDateBirth() {
-        familyTree.sort(new NameLength<>());
+        familyTree.sort(new ByDateBirth<>());
     }
 
     public void sortByNameLength() {
-        familyTree.sort((new ByDateBirth<>()));
-
+        familyTree.sort(new NameLength<>());
     }
 }

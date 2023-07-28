@@ -1,12 +1,9 @@
-import model.familyTrees.FamilyTree;
 import model.fileManage.FileManager;
-import model.members.Member;
 import presenter.Presenter;
-import view.ConsoleUI;
+import view.consoleUI.ConsoleUI;
 import view.View;
 
 import static model.familyTrees.FamilyTreesArchive.fedorov;
-import static model.familyTrees.FamilyTreesArchive.barboss;
 
 
 public class Main {

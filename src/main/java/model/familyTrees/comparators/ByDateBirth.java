@@ -3,7 +3,6 @@ package model.familyTrees.comparators;
 import model.members.Member;
 
 import java.util.Comparator;
-
 public class ByDateBirth<T extends Member> implements Comparator<T> {
 
     @Override

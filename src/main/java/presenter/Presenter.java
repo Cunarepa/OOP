@@ -1,21 +1,27 @@
 package presenter;
 
 import model.members.Human;
-import model.service.HumanService;
+import model.services.HumanService;
 import model.members.Gender;
 import model.members.Member;
-import view.menu.sortMenu.SortingMenu;
 
 import java.io.Serializable;
 import java.util.List;
 public class Presenter implements Serializable {
+
+    boolean importFileLoaded;
+
     private HumanService humanService;
-
-
     public Presenter() {
+        importFileLoaded = false;
+
         this.humanService = new HumanService();
     }
 
+
+    public boolean isImportFileLoaded() {
+        return importFileLoaded;
+    }
 
     public boolean checkCreateFamilyTree() {
         return humanService.checkCreateFamilyTree();
@@ -27,6 +33,10 @@ public class Presenter implements Serializable {
 
     public void importFile(String filePath) {
         humanService.importFile(filePath);
+        if (checkCreateFamilyTree()){
+            importFileLoaded = true;
+
+        }
     }
 
     public void saveFile() {
@@ -37,10 +47,6 @@ public class Presenter implements Serializable {
         humanService.addRecord(name, gender, yearOfBirth);
     }
 
-    public void addRecord(String name, Gender gender, int dateOfBirth,
-                          String parentName, int yearOfBirth) {
-        humanService.addRecord(name, gender, dateOfBirth, parentName, yearOfBirth);
-    }
 
     public void addRecord(String name, Gender gender, int dateOfBirth,
                           String fatherName, int yearOfBirthFather,
@@ -56,11 +62,9 @@ public class Presenter implements Serializable {
         return humanService.getRecord(name, yearOfBirth);
     }
 
-
     public List<Human> getAllRecord() {
         return humanService.getAllRecord();
     }
-
 
     public List<Human> getParents(String name, int yearOfBirth) {
         return humanService.getParents(name, yearOfBirth);

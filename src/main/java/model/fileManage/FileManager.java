@@ -8,17 +8,15 @@ import model.fileManage.interfaces.Savable;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
+
 public class FileManager implements Savable, Loadable {
 
 
     private String filePath;
 
-
     public FileManager(String filePath) {
         this.filePath = filePath;
     }
-
-
 
     @Override
     public void saveFile(Object object) {
@@ -29,8 +27,6 @@ public class FileManager implements Savable, Loadable {
             System.out.println("Export error");
         }
     }
-
-
 
     @Override
     public FamilyTree loadFile() {
