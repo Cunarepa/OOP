@@ -7,11 +7,14 @@ public interface Member extends Serializable {
 
     public String getName();
 
+
     public Year getYearOfBirth();
 
     public Gender getGender();
 
+
     public Member getFather();
+
 
     public void setFather(Member father);
 
@@ -23,4 +26,5 @@ public interface Member extends Serializable {
 
     public List<Member> getChildren();
 
+    public int hashCode();
 }

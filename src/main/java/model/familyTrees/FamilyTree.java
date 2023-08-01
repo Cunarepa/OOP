@@ -12,6 +12,7 @@ import java.util.*;
 public class FamilyTree<T extends Member> implements Serializable, Iterable<T> {
     private List<T> familyTree;
     private String nameFamilyTree;
+
     public FamilyTree(String nameFamilyTree) {
         this.nameFamilyTree = nameFamilyTree;
         this.familyTree = new ArrayList<>();
@@ -57,6 +58,7 @@ public class FamilyTree<T extends Member> implements Serializable, Iterable<T> {
         }
     }
 
+
     public void addPersonInFamilyTree(T child,
                                       String fatherName, int yearOfBirthFather,
                                       String motherName, int yearOfBirthMother) {
@@ -76,9 +78,11 @@ public class FamilyTree<T extends Member> implements Serializable, Iterable<T> {
         return result.orElse(null);
     }
 
+
     private boolean isPersonInTree(T person) {
         return familyTree.contains(person);
     }
+
 
     public List<Member> getParents(String parentName, int yearOfBirth) {
         T child = getPersonFromTree(parentName, yearOfBirth);
@@ -90,16 +94,19 @@ public class FamilyTree<T extends Member> implements Serializable, Iterable<T> {
         return temp;
     }
 
+
     public List<Member> getChildren(String parentName, int yearOfBirth) {
         return Optional.ofNullable(getPersonFromTree(parentName, yearOfBirth))
                 .map(T::getChildren).orElse(null);
     }
 
 
+
     @Override
     public Iterator<T> iterator() {
         return new FamilyTreeIterator(familyTree);
     }
+
 
     public void sortTreeByDateBirth() {
         familyTree.sort(new ByDateBirth<>());

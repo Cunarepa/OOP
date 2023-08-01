@@ -5,6 +5,8 @@ import model.familyTrees.comparators.ByDateBirth;
 import model.familyTrees.comparators.NameAlphabetical;
 import model.familyTrees.comparators.NameLength;
 import model.fileManage.FileManager;
+import model.fileManage.interfaces.Loadable;
+import model.fileManage.interfaces.Savable;
 import model.members.Gender;
 import model.members.Human;
 import model.members.Member;
@@ -14,14 +16,22 @@ import java.util.List;
 
 public class HumanService {
     private FamilyTree<Human> familyTree;
-    private FileManager fileManager;
+    private Savable savable;
+    private Loadable loadable;
+    private String filePath;
+
     public HumanService() {
         this.familyTree = null;
+        this.loadable = new FileManager(null);
+        this.savable = new FileManager(null);
     }
 
-    public FamilyTree<Human> getFamilyTree() {
-        return familyTree;
+    public void setFileInterface(Savable savable, Loadable loadable) {
+        this.savable = savable;
+        this.loadable = loadable;
     }
+
+
 
     public String getNameFamilyTree() {
         return familyTree.getNameFamilyTree();
@@ -31,15 +41,16 @@ public class HumanService {
         return familyTree != null;
     }
 
-
-    public void importFile(String filePath) {
-        this.fileManager = new FileManager(filePath);
-        this.familyTree = fileManager.loadFile();
+    public void loadFile(String filePath) {
+        this.filePath = filePath;
+        this.loadable.setFilePath(filePath);
+        this.familyTree = (FamilyTree<Human>) loadable.loadFile();
     }
 
 
     public void saveFile() {
-        fileManager.saveFile(familyTree);
+        this.savable.setFilePath(filePath);
+        savable.saveFile(familyTree);
     }
 
     public void addRecord(String name, Gender gender, int dateOfBirth) {
@@ -56,12 +67,15 @@ public class HumanService {
                 motherName, yearOfBirthMother);
     }
 
+
     public Member getRecord(String name, int year) {
         return familyTree.getPersonFromTree(name, year);
     }
+
     public List<Human> getAllRecord() {
         return familyTree.getFamilyTree();
     }
+
     public List<Human> getParents(String name, int yearOfBirth) {
         return convertMemberToChildren(familyTree.getParents(name, yearOfBirth));
     }

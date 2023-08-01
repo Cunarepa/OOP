@@ -13,7 +13,6 @@ public class FamilyTreeIterator<T extends Member> implements Iterator<T> {
     public FamilyTreeIterator(List<T> personList) {
         this.personList = personList;
     }
-
     @Override
 
     public boolean hasNext() {

@@ -6,7 +6,6 @@ import view.consoleUI.menu.endMenu.commands.Save;
 import view.consoleUI.menu.mainMenu.commands.*;
 
 import java.util.Arrays;
-
 public class MainMenu extends Menu {
 
     private boolean isRun;

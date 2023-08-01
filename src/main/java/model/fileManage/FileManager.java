@@ -1,13 +1,11 @@
 package model.fileManage;
 
 
-import model.familyTrees.FamilyTree;
 import model.fileManage.interfaces.Loadable;
 import model.fileManage.interfaces.Savable;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
+
 
 public class FileManager implements Savable, Loadable {
 
@@ -15,6 +13,10 @@ public class FileManager implements Savable, Loadable {
     private String filePath;
 
     public FileManager(String filePath) {
+        this.filePath = filePath;
+    }
+
+    public void setFilePath(String filePath) {
         this.filePath = filePath;
     }
 
@@ -28,12 +30,13 @@ public class FileManager implements Savable, Loadable {
         }
     }
 
+
     @Override
-    public FamilyTree loadFile() {
+    public Object loadFile() {
         try (FileInputStream fileInputStream = new FileInputStream(filePath);
              ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)) {
             System.out.println("load is done");
-            return (FamilyTree) objectInputStream.readObject();
+            return objectInputStream.readObject();
         } catch (IOException | ClassNotFoundException e) {
             System.out.println("Error uploading file");
         }

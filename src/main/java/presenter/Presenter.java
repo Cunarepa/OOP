@@ -1,20 +1,20 @@
 package presenter;
 
+import model.fileManage.interfaces.Loadable;
+import model.fileManage.interfaces.Savable;
 import model.members.Human;
 import model.services.HumanService;
 import model.members.Gender;
 import model.members.Member;
 
-import java.io.Serializable;
 import java.util.List;
-public class Presenter implements Serializable {
+public class Presenter {
 
     boolean importFileLoaded;
-
     private HumanService humanService;
+
     public Presenter() {
         importFileLoaded = false;
-
         this.humanService = new HumanService();
     }
 
@@ -31,13 +31,13 @@ public class Presenter implements Serializable {
         return humanService.getNameFamilyTree();
     }
 
-    public void importFile(String filePath) {
-        humanService.importFile(filePath);
+    public void loadFile(String filePath) {
+        humanService.loadFile(filePath);
         if (checkCreateFamilyTree()){
             importFileLoaded = true;
-
         }
     }
+
 
     public void saveFile() {
         humanService.saveFile();

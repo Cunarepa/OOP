@@ -2,6 +2,7 @@ package model.familyTrees;
 
 import model.members.Aliens;
 import model.members.Human;
+import model.members.Member;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,13 +10,13 @@ import java.util.List;
 import static model.members.Gender.MAN;
 import static model.members.Gender.WOMAN;
 
-
 public class FamilyTreesArchive {
+
     public List<FamilyTree> familyTreeList = new ArrayList<>(){{
         add(fedorov);
         add(barboss);
     }};
-    public static FamilyTree<Human> fedorov = new FamilyTree<>("Федоровы") {
+    public static FamilyTree<Member> fedorov = new FamilyTree<>("Федоровы") {
         {
             addPersonInFamilyTree(new Human("Антон", MAN, 1900));
             addPersonInFamilyTree(new Human("Анатолий", MAN, 1950), "Антон", 1900);

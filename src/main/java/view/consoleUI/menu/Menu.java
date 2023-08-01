@@ -33,6 +33,7 @@ public abstract class Menu {
         return commandList.size();
     }
 
+
     public int checkInputLineMenu(String choice) {
         if (choice.matches("[0-9]+")) {
             int result = Integer.parseInt(choice);

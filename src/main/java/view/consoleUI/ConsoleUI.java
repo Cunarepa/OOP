@@ -6,13 +6,14 @@ import model.members.Member;
 import presenter.Presenter;
 import view.View;
 import view.consoleUI.input.InputReader;
+import view.consoleUI.menu.allRecordsMenu.AllRecordsMenu;
 import view.consoleUI.menu.endMenu.EndMenu;
 import view.consoleUI.menu.mainMenu.MainMenu;
 import view.consoleUI.menu.recordMenu.RecordMenu;
-import view.consoleUI.menu.allRecordsMenu.AllRecordsMenu;
 import view.consoleUI.menu.sortingMenu.SortingMenu;
 
 import java.util.List;
+
 public class ConsoleUI implements View {
     private Presenter presenter;
     private MainMenu mainMenu;
@@ -20,26 +21,31 @@ public class ConsoleUI implements View {
     private InputReader input;
 
     public ConsoleUI(Presenter presenter) {
-//        work = true;
         mainMenu = new MainMenu(this);
         recordMenu = new RecordMenu(this);
         this.presenter = presenter;
         this.input = new InputReader();
     }
 
+
     @Override
     public void start() {
         System.out.println("Здравствуйте");
-        importFile();
+        loadFile();
         runMainMenu();
     }
 
-    public void importFile() {
+    public void loadFile() {
         while (!presenter.isImportFileLoaded()) {
-            presenter.importFile(
-                    input.inputLn("Укажите путь к файлу типа Human для загрузки (Пример: data/fedorovTree.bin)"));
+            presenter.loadFile(
+                    input.inputLn("Укажите путь к файлу типа Human для загрузки (Пример: data/ruriksTree.bin)"));
         }
     }
+    public void save() {
+        if ((input.inputLn("Вы уверены? 1.да 2.нет")).equals("1"))
+            presenter.saveFile();
+    }
+
 
     private void runMainMenu() {
         while (mainMenu.isRun()) {
@@ -139,7 +145,6 @@ public class ConsoleUI implements View {
 
     public List<Human> getAllRecord() {
         return presenter.getAllRecord();
-
     }
 
     public void showAllRecord() {
@@ -168,10 +173,6 @@ public class ConsoleUI implements View {
         mainMenu.setRun(false);
     }
 
-    public void save() {
-        if ((input.inputLn("Вы уверены? 1.да 2.нет")).equals("1"))
-            presenter.saveFile();
-    }
 
     public void sortByAlphabeticalOrder() {
         presenter.sortByAlphabeticalOrder();
